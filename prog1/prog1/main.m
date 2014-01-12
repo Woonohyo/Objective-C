@@ -15,6 +15,7 @@ int main(int argc, const char * argv[])
         
         // insert code here...
         NSLog(@"iOS Programming is Fun!");
+        NSLog(@"Android Programming also will be Fun!");
     }
     return 0;
 }
