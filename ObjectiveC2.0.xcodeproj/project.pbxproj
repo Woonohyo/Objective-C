@@ -10,6 +10,7 @@
 		4F0DAA061883DF9F00B750ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0DAA051883DF9F00B750ED /* Foundation.framework */; };
 		4F0DAA091883DF9F00B750ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DAA081883DF9F00B750ED /* main.m */; };
 		4F0DAA0D1883DF9F00B750ED /* ObjectiveC2_0.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F0DAA0C1883DF9F00B750ED /* ObjectiveC2_0.1 */; };
+		F1F29EA21885639B0026965B /* AddressCard.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F29EA11885639B0026965B /* AddressCard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		4F0DAA081883DF9F00B750ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4F0DAA0B1883DF9F00B750ED /* ObjectiveC2.0-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveC2.0-Prefix.pch"; sourceTree = "<group>"; };
 		4F0DAA0C1883DF9F00B750ED /* ObjectiveC2_0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ObjectiveC2_0.1; sourceTree = "<group>"; };
+		F1F29EA01885639B0026965B /* AddressCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCard.h; sourceTree = "<group>"; };
+		F1F29EA11885639B0026965B /* AddressCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressCard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				4F0DAA081883DF9F00B750ED /* main.m */,
+				F1F29EA01885639B0026965B /* AddressCard.h */,
+				F1F29EA11885639B0026965B /* AddressCard.m */,
 				4F0DAA0C1883DF9F00B750ED /* ObjectiveC2_0.1 */,
 				4F0DAA0A1883DF9F00B750ED /* Supporting Files */,
 			);
@@ -139,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1F29EA21885639B0026965B /* AddressCard.m in Sources */,
 				4F0DAA091883DF9F00B750ED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +257,7 @@
 				4F0DAA121883DF9F00B750ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

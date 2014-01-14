@@ -7,27 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AddressCard.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSMutableArray *numbers = [NSMutableArray array];
-        NSNumber *myNumbers;
-        int i;
+        NSString *aName = @"Wonhyo Ewan Yi";
+        NSString *aEmail = @"wonhyo.yi@linecorp.com";
+        AddressCard *card1 = [[AddressCard alloc] init];
         
-        for ( i = 0; i < 10; i++) {
-            myNumbers = [NSNumber numberWithInteger: i];
-            [numbers addObject:myNumbers];
-        }
+        [card1 setName:aName];
+        [card1 setEmail:aEmail];
+        [card1 print];
         
-        for ( i = 0; i < 10; i++) {
-            myNumbers = [numbers objectAtIndex: i];
-            NSLog(@"%@", myNumbers);
-        }
-        
-        NSLog(@"======  Using a single NSLog");
-        NSLog(@"%@", numbers);
     }
     return 0;
 }
