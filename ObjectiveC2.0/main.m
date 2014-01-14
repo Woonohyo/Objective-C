@@ -36,6 +36,13 @@ int main(int argc, const char * argv[])
         // find string within string
         subRange = [str1 rangeOfString:@"string A"];
         NSLog(@"String is at index %lu, length is %lu", subRange.location, subRange.length);
+        
+        subRange = [str2 rangeOfString:@"string B"];
+        
+        if (subRange.location == NSNotFound)
+            NSLog(@"String not found");
+        else
+            NSLog(@"String is at index %lu, length is %lu", subRange.location, subRange.length);
     
     }
     return 0;
