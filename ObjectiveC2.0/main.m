@@ -15,44 +15,28 @@ int main(int argc, const char * argv[])
         NSString *str1 = @"This is string A ";
         NSString *str2 = @"This is string B ";
         NSString *res;
-        NSComparisonResult compareResult;
+        NSRange subRange;
+       
+        // 첫 3번째 문자까지 추출
+        res = [str1 substringToIndex: 3];
+        NSLog(@"First 3 chars of str1: %@", res);
         
-        //Counting chars
-        NSLog(@"Length of str1: %lu", [str1 length]);
+        // 인덱스 5부터 끝까지 문자 추출
+        res = [str1 substringFromIndex: 5];
+        NSLog(@"Chars from index 5 of str1: %@", res);
         
-        //Copying str
-        res = [NSString stringWithString:str1];
-        NSLog(@"copy: %@", res);
+        // index 8 ~ 13 (6 chars)
+        res = [[str1 substringFromIndex: 8] substringToIndex: 6];
+        NSLog(@"Chars from index 8 to 13 of str1: %@", res);
         
-        //Concatenating str
-        str2 = [str1 stringByAppendingString:str2];
-        NSLog(@"Concatentation: %@", str2);
+        //easier way of just above one.
+        res = [str1 substringWithRange:NSMakeRange(8, 6)];
+        NSLog(@"Chars from index 8 to 13 of str1: %@", res);
         
-        //check equality
-        if ([str1 isEqualToString:res] == YES)
-            NSLog(@"str1 == res");
-        else
-            NSLog(@"str1 != res");
-        
-        // comparing length of strs
-        compareResult = [str1 compare:str2];
-        
-        if (compareResult == NSOrderedAscending)
-            NSLog(@"str2 is longer than str1");
-        else if (compareResult == NSOrderedDescending)
-            NSLog(@"str1 is longer than str2");
-        else
-            NSLog(@"same length");
-        
-        // uppercasing
-        res = [str1 uppercaseString];
-        NSLog(@"Uppercase conversion: %s", [res UTF8String]);
-        
-        // lowercasing
-        res = [str1 lowercaseString];
-        NSLog(@"Lowercase conversion: %s", [res UTF8String]);
-        
-        NSLog(@"Original String: %@", str1);
+        // find string within string
+        subRange = [str1 rangeOfString:@"string A"];
+        NSLog(@"String is at index %lu, length is %lu", subRange.location, subRange.length);
+    
     }
     return 0;
 }
