@@ -12,41 +12,47 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSNumber    *myNumber, *floatNumber, *intNumber;
-        NSInteger   myInt;
+        NSString *str1 = @"This is string A ";
+        NSString *str2 = @"This is string B ";
+        NSString *res;
+        NSComparisonResult compareResult;
         
-        //Integer value
-        intNumber = [NSNumber numberWithInteger:100];
-        myInt = [intNumber integerValue];
-        NSLog(@"%li", (long) myInt);
+        //Counting chars
+        NSLog(@"Length of str1: %lu", [str1 length]);
         
-        //Long value
-        myNumber = [NSNumber numberWithLong: 0xbab0bab0];
-        NSLog(@"%lx", [myNumber longValue]);
+        //Copying str
+        res = [NSString stringWithString:str1];
+        NSLog(@"copy: %@", res);
         
-        //Char value
-        myNumber = [NSNumber numberWithChar:'X'];
-        NSLog(@"%c", [myNumber charValue]);
+        //Concatenating str
+        str2 = [str1 stringByAppendingString:str2];
+        NSLog(@"Concatentation: %@", str2);
         
-        //float value
-        floatNumber = [NSNumber numberWithFloat:100.00];
-        NSLog(@"%g", [floatNumber floatValue]);
+        //check equality
+        if ([str1 isEqualToString:res] == YES)
+            NSLog(@"str1 == res");
+        else
+            NSLog(@"str1 != res");
         
-        //double value
-        myNumber = [NSNumber numberWithDouble:12345e+15];
-        NSLog(@"%lg", [myNumber doubleValue]);
+        // comparing length of strs
+        compareResult = [str1 compare:str2];
         
-        //Error
-        NSLog(@"%li", (long) [myNumber integerValue]);
+        if (compareResult == NSOrderedAscending)
+            NSLog(@"str2 is longer than str1");
+        else if (compareResult == NSOrderedDescending)
+            NSLog(@"str1 is longer than str2");
+        else
+            NSLog(@"same length");
         
-        //equal or not equal
-        if ([intNumber isEqualToNumber:floatNumber] == YES)
-            NSLog(@"Numbers are equal");
-        else NSLog(@"Nubmers are not equal");
+        // uppercasing
+        res = [str1 uppercaseString];
+        NSLog(@"Uppercase conversion: %s", [res UTF8String]);
         
-        //larger or smaller
-        if ([intNumber compare: myNumber] == NSOrderedAscending)
-            NSLog(@"First number is less than second");
+        // lowercasing
+        res = [str1 lowercaseString];
+        NSLog(@"Lowercase conversion: %s", [res UTF8String]);
+        
+        NSLog(@"Original String: %@", str1);
     }
     return 0;
 }
