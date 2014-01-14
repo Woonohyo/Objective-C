@@ -12,38 +12,37 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSString *str1 = @"This is string A ";
-        NSString *str2 = @"This is string B ";
-        NSString *res;
-        NSRange subRange;
-       
-        // 첫 3번째 문자까지 추출
-        res = [str1 substringToIndex: 3];
-        NSLog(@"First 3 chars of str1: %@", res);
+        NSString *str1 = @"This is string A";
+        NSString *search, *replace;
+        NSMutableString *mstr;
+        NSRange substr;
         
-        // 인덱스 5부터 끝까지 문자 추출
-        res = [str1 substringFromIndex: 5];
-        NSLog(@"Chars from index 5 of str1: %@", res);
+        // making of mutable string from nonmutable string
+        mstr = [NSMutableString stringWithString: str1];
+        NSLog(@"%@", mstr);
         
-        // index 8 ~ 13 (6 chars)
-        res = [[str1 substringFromIndex: 8] substringToIndex: 6];
-        NSLog(@"Chars from index 8 to 13 of str1: %@", res);
+        // insert char
+        [mstr insertString:@" mutable" atIndex:7];
+        [NSLog(@"%@", mstr)];
         
-        //easier way of just above one.
-        res = [str1 substringWithRange:NSMakeRange(8, 6)];
-        NSLog(@"Chars from index 8 to 13 of str1: %@", res);
+        // concatenation to the end
+        [mstr insertString:@"and string B" atIndex:[mstr length]];
+        NSLog(@"%@", mstr);
         
-        // find string within string
-        subRange = [str1 rangeOfString:@"string A"];
-        NSLog(@"String is at index %lu, length is %lu", subRange.location, subRange.length);
+        // direct use of appendString
+        [mstr appendString:@"and strign C"];
+        NSLog(@"%@", mstr);
         
-        subRange = [str2 rangeOfString:@"string B"];
+        // deletion of substring with given range.
+        [mstr deleteCharactersInRange:NSMakeRange(16, 13)];
+        NSLog(@"%@", mstr);
         
-        if (subRange.location == NSNotFound)
-            NSLog(@"String not found");
-        else
-            NSLog(@"String is at index %lu, length is %lu", subRange.location, subRange.length);
-    
+        // deletion of substring by finding range of it.
+        substr = [mstr rangeOfString:@"string B and"];
+        if (substr.location != NSNotFound) {
+            [mstr deleteCharactersInRange: substr];
+            NSLog(@"%@", mstr);
+        }
     }
     return 0;
 }
