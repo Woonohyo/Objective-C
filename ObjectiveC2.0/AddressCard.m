@@ -19,12 +19,14 @@
 // 메서드로 건네지는 인수의 참조만 담고 있게 됨.
 - (void) setName:(NSString *)theName
 {
-    name = [NSString stringWithString:theName];
+    if (name != theName)
+        name = [NSString stringWithString:theName];
 }
 
 - (void) setEmail:(NSString *)theEmail
 {
-    email = [NSString stringWithString:theEmail];
+    if (email != theEmail)
+        email = [NSString stringWithString:theEmail];
 }
 
 - (NSString *)name
