@@ -27,4 +27,13 @@
     NSLog(@"==================================");
 }
 
+- (void)setName:(NSString *)theName andEmail:(NSString *)theEmail
+{
+    // [self setName: theName]과 동일한 기능.
+    self.name = theName;
+    self.email = theEmail;
+    
+    //단, name = theName 인스턴스 변수에 인수의 값을 바로 대입.
+}
+
 @end

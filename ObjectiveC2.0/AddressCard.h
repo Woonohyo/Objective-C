@@ -16,5 +16,5 @@
 // 발생할 수 있는 경쟁조건에 대해 걱정할 필요가 없다고 지시.
 @property (copy, nonatomic) NSString *name, *email;
 - (void) print;
-
+- (void) setName:(NSString *) theName andEmail:(NSString *) theEmail;
 @end
