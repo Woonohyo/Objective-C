@@ -23,7 +23,7 @@ int main(int argc, const char * argv[])
         
         // insert char
         [mstr insertString:@" mutable" atIndex:7];
-        [NSLog(@"%@", mstr)];
+        NSLog(@"%@", mstr);
         
         // concatenation to the end
         [mstr insertString:@"and string B" atIndex:[mstr length]];
@@ -43,6 +43,38 @@ int main(int argc, const char * argv[])
             [mstr deleteCharactersInRange: substr];
             NSLog(@"%@", mstr);
         }
+        
+        // setting mutable string
+        [mstr setString:@"This is string A"];
+        NSLog(@"%@", mstr);
+        
+        // replace certain range with string
+        [mstr replaceCharactersInRange:NSMakeRange(8, 8) withString:@"a mutable string"];
+        NSLog(@"%@", mstr);
+        
+        // search and replacement
+        search = @"This is";
+        replace = @"An example of";
+        
+        substr = [mstr rangeOfString: search];
+        
+        if (substr.location != NSNotFound) {
+            [mstr replaceCharactersInRange:substr withString:replace];
+        }
+        NSLog(@"%@", mstr);
+        
+        // find all and replacement
+        search = @"a";
+        replace = @"X";
+        
+        substr = [mstr rangeOfString: search];
+        
+        while (substr.location != NSNotFound) {
+            [mstr replaceCharactersInRange:substr withString:replace];
+            substr = [mstr rangeOfString: search];
+        }
+        
+        NSLog(@"%@", mstr);
     }
     return 0;
 }
