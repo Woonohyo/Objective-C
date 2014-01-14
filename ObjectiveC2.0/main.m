@@ -12,15 +12,22 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSArray *monthNames = [NSArray arrayWithObjects:@"January", @"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December", nil];
+        NSMutableArray *numbers = [NSMutableArray array];
+        NSNumber *myNumbers;
+        int i;
         
-        NSLog(@"Month   Name");
-        NSLog(@"=====   ====");
-        
-        for (int i = 0; i < 12; i++)
-        {
-            NSLog(@" %2i      %@", i + 1, [monthNames objectAtIndex: i]);
+        for ( i = 0; i < 10; i++) {
+            myNumbers = [NSNumber numberWithInteger: i];
+            [numbers addObject:myNumbers];
         }
+        
+        for ( i = 0; i < 10; i++) {
+            myNumbers = [numbers objectAtIndex: i];
+            NSLog(@"%@", myNumbers);
+        }
+        
+        NSLog(@"======  Using a single NSLog");
+        NSLog(@"%@", numbers);
     }
     return 0;
 }
