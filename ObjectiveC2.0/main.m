@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AddressCard.h"
+#import "AddressBook.h"
 
 int main(int argc, const char * argv[])
 {
@@ -17,16 +17,26 @@ int main(int argc, const char * argv[])
         NSString *aEmail = @"wonhyo.yi@linecorp.com";
         NSString *bName = @"Minju Jane Kim";
         NSString *bEmail = @"minju.kim@nhnnext.org";
+        NSString *cName = @"Dayoungle Jun";
+        NSString *cEmail = @"dayoungle.jun@nhnnext.org";
         
         AddressCard *card1 = [[AddressCard alloc] init];
         AddressCard *card2 = [[AddressCard alloc] init];
+        AddressCard *card3 = [[AddressCard alloc] init];
+        
+        AddressBook *myBook = [[AddressBook alloc] initWithName:@"Woonohyo's Address Book"];
         
         [card1 setName:aName andEmail:aEmail];
         [card2 setName:bName andEmail:bEmail];
+        [card3 setName:cName andEmail:cEmail];
         
-        [card1 print];
-        [card2 print];
+        [myBook addCard: card1];
+        [myBook addCard: card2];
+        [myBook addCard: card3];
         
+        NSLog(@"Entries in address book after adding cards: %li", [myBook entries]);
+        
+        [myBook list];
     }
     return 0;
 }
