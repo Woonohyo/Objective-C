@@ -36,4 +36,9 @@
     //단, name = theName 인스턴스 변수에 인수의 값을 바로 대입.
 }
 
+- (NSComparisonResult)compareNames:(id)element
+{
+    return [name compare: [element name]];
+}
+
 @end

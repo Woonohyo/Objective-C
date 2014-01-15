@@ -19,10 +19,13 @@ int main(int argc, const char * argv[])
         NSString *bEmail = @"minju.kim@nhnnext.org";
         NSString *cName = @"Dayoungle Jun";
         NSString *cEmail = @"dayoungle.jun@nhnnext.org";
+        NSString *dName = @"Soeun Park";
+        NSString *dEmail = @"soeun.park@nhnnext.org";
         
         AddressCard *card1 = [[AddressCard alloc] init];
         AddressCard *card2 = [[AddressCard alloc] init];
         AddressCard *card3 = [[AddressCard alloc] init];
+        AddressCard *card4 = [[AddressCard alloc] init];
         AddressCard *myCard;
         
         AddressBook *myBook = [[AddressBook alloc] initWithName:@"Woonohyo's Address Book"];
@@ -30,30 +33,18 @@ int main(int argc, const char * argv[])
         [card1 setName:aName andEmail:aEmail];
         [card2 setName:bName andEmail:bEmail];
         [card3 setName:cName andEmail:cEmail];
+        [card4 setName:dName andEmail:dEmail];
         
         [myBook addCard: card1];
         [myBook addCard: card2];
         [myBook addCard: card3];
+        [myBook addCard: card4];
         
         NSLog(@"Entries in address book after adding cards: %li", [myBook entries]);
         
         [myBook list];
         
-        NSLog(@"Stephen Kochan");
-        myCard = [myBook lookup:@"Stephen Kochan"];
-        if ( myCard != nil )
-            [myCard print];
-        else
-            NSLog(@"Not Found");
-        
-        NSLog(@"Wonhyo Ewan Yi");
-        myCard = [myBook lookup:@"Wonhyo Ewan Yi"];
-        if (myCard != nil)
-            [myCard print];
-        else
-            NSLog(@"Not Found");
-        
-        [myBook removeCard: myCard];
+        [myBook sort];
         [myBook list];
     }
     return 0;
