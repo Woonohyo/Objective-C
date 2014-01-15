@@ -13,19 +13,21 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
+        NSDictionary *glossary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"A class defined so other classes can inherit from it",
+                                  @"abstract class",
+                                  @"To implement all the methods in a protocol",
+                                  @"adopt",
+                                  @"Storing an object for later use",
+                                  @"archiving",
+                                  nil
+                                  ];
+        for ( NSString *key in glossary )
+        {
+            NSLog(@"%@: %@", key, [glossary objectForKey:key]);
+        }
         
-        //save 3 objs to dictionary
-        
-        [glossary setObject:@"A class defined so other class can inherit from it" forKey:@"abstract class"];
-        [glossary setObject:@"To implement all the methods defined in a protocol" forKey:@"adopt"];
-        [glossary setObject:@"Storing an object for later use" forKey:@"archiving"];
-        
-        // print
-        NSLog(@"abstract class: %@", [glossary objectForKey:@"abstract class"]);
-        NSLog(@"adopt: %@", [glossary objectForKey:@"adopt"]);
-        NSLog(@"archiving: %@", [glossary objectForKey:@"archiving"]);
-    }
+        }
     return 0;
 }
 
