@@ -52,6 +52,9 @@ int main(int argc, const char * argv[])
             [myCard print];
         else
             NSLog(@"Not Found");
+        
+        [myBook removeCard: myCard];
+        [myBook list];
     }
     return 0;
 }
