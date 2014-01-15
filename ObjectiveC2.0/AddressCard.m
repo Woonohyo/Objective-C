@@ -38,7 +38,7 @@
 
 - (NSComparisonResult)compareNames:(id)element
 {
-    return [name compare: [element name]];
+    return [[element name] compare: name];
 }
 
 @end
