@@ -13,39 +13,18 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        NSString *aName = @"Wonhyo Ewan Yi";
-        NSString *aEmail = @"wonhyo.yi@linecorp.com";
-        NSString *bName = @"Minju Jane Kim";
-        NSString *bEmail = @"minju.kim@nhnnext.org";
-        NSString *cName = @"Dayoungle Jun";
-        NSString *cEmail = @"dayoungle.jun@nhnnext.org";
-        NSString *dName = @"Soeun Park";
-        NSString *dEmail = @"soeun.park@nhnnext.org";
+        NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
         
-        AddressCard *card1 = [[AddressCard alloc] init];
-        AddressCard *card2 = [[AddressCard alloc] init];
-        AddressCard *card3 = [[AddressCard alloc] init];
-        AddressCard *card4 = [[AddressCard alloc] init];
-        AddressCard *myCard;
+        //save 3 objs to dictionary
         
-        AddressBook *myBook = [[AddressBook alloc] initWithName:@"Woonohyo's Address Book"];
+        [glossary setObject:@"A class defined so other class can inherit from it" forKey:@"abstract class"];
+        [glossary setObject:@"To implement all the methods defined in a protocol" forKey:@"adopt"];
+        [glossary setObject:@"Storing an object for later use" forKey:@"archiving"];
         
-        [card1 setName:aName andEmail:aEmail];
-        [card2 setName:bName andEmail:bEmail];
-        [card3 setName:cName andEmail:cEmail];
-        [card4 setName:dName andEmail:dEmail];
-        
-        [myBook addCard: card1];
-        [myBook addCard: card2];
-        [myBook addCard: card3];
-        [myBook addCard: card4];
-        
-        NSLog(@"Entries in address book after adding cards: %li", [myBook entries]);
-        
-        [myBook list];
-        
-        [myBook sort];
-        [myBook list];
+        // print
+        NSLog(@"abstract class: %@", [glossary objectForKey:@"abstract class"]);
+        NSLog(@"adopt: %@", [glossary objectForKey:@"adopt"]);
+        NSLog(@"archiving: %@", [glossary objectForKey:@"archiving"]);
     }
     return 0;
 }
