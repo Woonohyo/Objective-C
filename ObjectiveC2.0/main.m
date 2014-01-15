@@ -23,6 +23,7 @@ int main(int argc, const char * argv[])
         AddressCard *card1 = [[AddressCard alloc] init];
         AddressCard *card2 = [[AddressCard alloc] init];
         AddressCard *card3 = [[AddressCard alloc] init];
+        AddressCard *myCard;
         
         AddressBook *myBook = [[AddressBook alloc] initWithName:@"Woonohyo's Address Book"];
         
@@ -37,6 +38,20 @@ int main(int argc, const char * argv[])
         NSLog(@"Entries in address book after adding cards: %li", [myBook entries]);
         
         [myBook list];
+        
+        NSLog(@"Stephen Kochan");
+        myCard = [myBook lookup:@"Stephen Kochan"];
+        if ( myCard != nil )
+            [myCard print];
+        else
+            NSLog(@"Not Found");
+        
+        NSLog(@"Wonhyo Ewan Yi");
+        myCard = [myBook lookup:@"Wonhyo Ewan Yi"];
+        if (myCard != nil)
+            [myCard print];
+        else
+            NSLog(@"Not Found");
     }
     return 0;
 }

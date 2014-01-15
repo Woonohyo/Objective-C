@@ -15,8 +15,13 @@
 @property (nonatomic, strong) NSMutableArray *book;
 
 - (id) initWithName: (NSString *) name;
+
 - (void) addCard: (AddressCard *) theCard;
+- (void) removeCard: (AddressCard *) theCard;
+
 - (NSUInteger) entries;
 - (void) list;
+- (AddressCard *) lookup: (NSString *) theName;
+
 
 @end
