@@ -7,73 +7,63 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AddressBook.h"
 
-// Creating Integer Object
-#define INTOBJ(v) [NSNumber numberWithInteger: v]
-
-// Adding print method to NSSet as Printing category
-@interface NSSet (Printing)
-- (void) print;
-@end
-
-@implementation NSSet (Printing)
-- (void) print {
-    printf ("{ ");
-    
-    for (NSNumber *element in self)
-        printf (" %li ", (long) [element integerValue]);
-    
-    printf ("} \n");
-}
-@end
+#define PATH @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/"
 
 int main(int argc, const char * argv[])
 {
-
+    
     @autoreleasepool {
-        NSMutableSet *set1 = [NSMutableSet setWithObjects:INTOBJ(1), INTOBJ(3), INTOBJ(5), INTOBJ(10), nil];
-        NSSet *set2 = [NSSet setWithObjects:INTOBJ(-5), INTOBJ(100), INTOBJ(3), INTOBJ(5), nil];
-        NSSet *set3 = [NSSet setWithObjects:INTOBJ(12), INTOBJ(200), INTOBJ(3), nil];
+        NSString                *fName = @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testfile";
+        NSFileManager           *fm;
+        NSDictionary            *attr;
         
-        NSLog(@"set1: ");
-        [set1 print];
-        NSLog(@"set2: ");
-        [set2 print];
+        // Generating instance of fileManager
+        fm = [NSFileManager defaultManager];
         
-        // Equality Test
-        if ([set1 isEqualToSet:set2] == YES)
-            NSLog(@"set1 equals set2");
-        else
-            NSLog(@"set1 is not equal to set2");
+        // check the existency of testfile
+        if([fm fileExistsAtPath: fName] == NO) {
+            NSLog(@"File doesn't exist!");
+            return 1;
+        }
         
-        // Membership Test
-        if ([set1 containsObject:INTOBJ(10)] == YES)
-            NSLog(@"set1 contains 10");
-        else
-            NSLog(@"set1 doesn't contain 10");
+        // Copying the file
+        if ([fm copyItemAtPath: fName toPath: @"newfile" error: NULL] == NO) {
+            NSLog(@"File Copy Failed");
+            return 2;
+        }
         
-        if ([set2 containsObject:INTOBJ(10)] == YES)
-            NSLog(@"set2 contains 10");
-        else
-            NSLog(@"set2 doesn't contain 10");
+        // Comparing copied one to original one.
+        if ([fm contentsEqualAtPath: fName andPath: @"newfile"] == NO) {
+            NSLog(@"Files are not Equal");
+            return 3;
+        }
         
-        // adding and removing objects of mutableset set1.
-        [set1 addObject:INTOBJ(4)];
-        [set1 removeObject:INTOBJ(10)];
-        NSLog(@"set1 after adding 4 and removing 10: ");
-        [set1 print];
+        // rename copied one.
+        if ([fm moveItemAtPath:@"newfile" toPath:@"newfile2" error:NULL] == NO) {
+            NSLog(@"File rename Failed");
+            return 4;
+        }
         
-        // get intersectset.
-        [set1 intersectSet: set2];
-        NSLog(@"set1 intersect set2: ");
-        [set1 print];
+        // get file size of newfile2
+        if ((attr = [fm attributesOfItemAtPath:@"newfile2" error:NULL]) == nil) {
+            NSLog(@"Couldn't get file attributes!");
+            return 5;
+        }
         
-        // get unionset
-        [set1 unionSet: set2];
-        NSLog(@"set1 union set3: ");
-        [set1 print];
+        NSLog(@"File size is %llu bytes", [[attr objectForKey: NSFileSize] unsignedLongLongValue]);
+        
+        // Delete original one
+        
+        if ([fm removeItemAtPath:fName error:NULL] == NO) {
+            NSLog(@"file removal failed");
+            return 6;
+        }
+        
+        NSLog(@"All operations were successful!");
+        
+        NSLog(@"%@", [NSString stringWithContentsOfFile:@"newfile2" encoding:NSUTF8StringEncoding error:NULL]);
+        
     }
     return 0;
 }
-
