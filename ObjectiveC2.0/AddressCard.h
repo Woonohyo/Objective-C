@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AddressCard : NSObject
+@interface AddressCard : NSObject <NSCoding, NSCopying>
 
 // copy = 세터 메서드에서 인스턴스 변수의 사본을 만들라는 의미.
 // (기본 속성은 단순하게 대입하는 assign. 부적절함)
@@ -18,5 +18,8 @@
 - (void) print;
 - (void) setName:(NSString *) theName andEmail:(NSString *) theEmail;
 - (NSComparisonResult) compareNames: (id) element;
+
+// Additional method for NSCopying protocol
 - (void) assignName: (NSString *) theName andEmail: (NSString *) theEmail;
+
 @end

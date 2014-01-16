@@ -9,22 +9,64 @@
 
 #import <Foundation/Foundation.h>
 #import "Fraction.h"
+#import "Foo.h"
+#import "AddressBook.h"
 #define PATH @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/"
 
 int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSDictionary *glossary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"A class defined so other classes can inherit from it",
-                                  @"abstract class",
-                                  @"To implement all the methods defined in a protocol",
-                                  @"adtop",
-                                  @"Storing an object for later use",
-                                  @"archiving:",
-                                  nil
-                                  ];
-        [NSKeyedArchiver archiveRootObject: glossary toFile:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/glossary2.archive"];
+        Foo             *myFoo1 = [[Foo alloc] init];
+        NSMutableData   *dataArea;
+        NSKeyedArchiver *archiver;
+        AddressBook *myBook = [AddressBook alloc];
+        
+        NSString *aName = @"Julia Kochan";
+        NSString *aEmail = @"jewls337@axlc.com";
+        NSString *bName = @"Tony Iannino";
+        NSString *bEmail = @"tony.iannino@techfitness.com";
+        NSString *cName = @"Stephen Kochan";
+        NSString *cEmail = @"steve@steve_kochan.com";
+        NSString *dName = @"Jamie Baker";
+        NSString *dEmail = @"jbaker@hitmail.com";
+        
+        AddressCard *card1 = [[AddressCard alloc] init];
+        AddressCard *card2 = [[AddressCard alloc] init];
+        AddressCard *card3 = [[AddressCard alloc] init];
+        AddressCard *card4 = [[AddressCard alloc] init];
+        
+       
+        // First set up four address cards
+        [card1 setName: aName andEmail: aEmail];
+        [card2 setName: bName andEmail: bEmail];
+        [card3 setName: cName andEmail: cEmail];
+        [card4 setName: dName andEmail: dEmail];
+        
+        myBook = [myBook initWithName: @"Steve'sAddress Book"];
+       
+        // Add some cards to the address book
+        [myBook addCard: card1];
+        [myBook addCard: card2];
+        [myBook addCard: card3];
+        [myBook addCard: card4];
+        
+        [myFoo1 setStrVal:@"This is string"];
+        [myFoo1 setIntVal: 12345];
+        [myFoo1 setFloatVal: 98.6];
+        
+        //Set up a data area and connect it to an NSKeyedArchiver object
+        dataArea = [NSMutableData data];
+        
+        archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: dataArea];
+        
+        //Now we can begin to archive objects
+        [archiver encodeObject: myBook forKey: @"myaddrbook"];
+        [archiver encodeObject: myFoo1 forKey: @"myfoo1"];
+        
+        // Write the archived data area to a file
+        if ([dataArea writeToFile: [PATH stringByAppendingString: @"myArchive"] atomically: YES] == NO)
+            NSLog(@"archiving failed");
     }
     return 0;
 }
