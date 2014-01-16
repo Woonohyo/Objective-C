@@ -15,35 +15,42 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSString                *path;
-        NSFileManager           *fm;
-        NSDirectoryEnumerator   *dirEnum;
-        NSArray                 *dirArray;
-        
-        // instancize FileManager
+        NSString        *fName = @"path.m";
+        NSFileManager   *fm;
+        NSString        *path, *tempdir, *extension, *homedir, *fullpath;
+        NSArray         *components;
         
         fm = [NSFileManager defaultManager];
         
-        // receiving current working directory
+        // get temporary working directory
         
+        tempdir = NSTemporaryDirectory();
+        
+        NSLog(@"Temporary Directory is %@", tempdir);
+        
+        // Get basic directory from current directory.
         path = [fm currentDirectoryPath];
+        NSLog(@"Base dir is %@", [path lastPathComponent]);
         
-        // enumerating directories
+        // generating full path of fName of current directory
         
-        dirEnum = [fm enumeratorAtPath: path];
+        fullpath = [path stringByAppendingPathComponent: fName];
+        NSLog(@"fullpath to %@ is %@", fName, fullpath);
         
-        NSLog(@"Contents of %@", path);
+        // getting extension of file
+        extension = [fullpath pathExtension];
+        NSLog(@"extension for %@ is %@", fullpath, extension);
         
-        while ((path = [dirEnum nextObject]) != nil)
+        // getting home directory of user
+        homedir = NSHomeDirectory();
+        NSLog(@"Your home directory is %@", homedir);
+        
+        // separate paths by each compoenent.
+        components = [homedir pathComponents];
+        
+        for (path in components)
             NSLog(@"%@", path);
         
-        //another way of enumerating
-        
-        dirArray = [fm contentsOfDirectoryAtPath: [fm currentDirectoryPath] error: NULL];
-        NSLog(@"Contents using contentsOfDirectoryAtAPath:error:");
-        
-        for( path in dirArray)
-            NSLog(@"%@", path);
           }
     return 0;
 }
