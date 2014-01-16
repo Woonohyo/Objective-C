@@ -15,28 +15,34 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        Fraction *frac1 = [[Fraction alloc] init];
-        Fraction *frac2 = [[Fraction alloc] init];
+        NSMutableArray      *dataArray = [NSMutableArray arrayWithObjects:
+                                          [NSMutableString stringWithString:@"one"],
+                                          [NSMutableString stringWithString:@"two"],
+                                          [NSMutableString stringWithString:@"three"],
+                                          nil
+                                          ];
         
-        // Set 1st fraction to 2/3
-        [frac1 setNumerator: 2];
-        [frac1 setDenominator: 3];
+        NSMutableArray      *dataArray2;
+        NSMutableString     *mStr;
         
-        // Set 2nd fraction to 3/7
-        [frac2 setNumerator: 3];
-        [frac2 setDenominator: 7];
+        NSLog(@"dataArray: ");
+        for ( NSString *elem in dataArray )
+            NSLog(@"    %@", elem);
         
-        // Display the fractions
+        // make a copy, then change one of the strings
+        dataArray2 = [dataArray mutableCopy];
         
-        NSLog(@"First fraction is: ");
-        [frac1 print];
+        mStr = dataArray[0];
+        [mStr appendString:@"ONE"];
         
-        NSLog(@"Second fraction is: ");
-        [frac2 print];
+        NSLog(@"dataArray:" );
+        for ( NSString *elem in dataArray )
+            NSLog(@"    %@", elem);
         
-        [frac1 release];
-        [frac2 release];
-
+        NSLog(@"dataArray2: ");
+        for ( NSString *elem in dataArray2 )
+            NSLog(@"    %@", elem);
+        
     }
     return 0;
 }
