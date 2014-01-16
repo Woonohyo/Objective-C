@@ -19,6 +19,7 @@ int main(int argc, const char * argv[])
         Fraction *f2;
         
         [f1 setTo: 2 over: 5];
+        
         f2 = [f1 copy];
         
         [f2 setTo: 1 over: 3];

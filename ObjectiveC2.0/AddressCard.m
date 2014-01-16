@@ -41,4 +41,18 @@
     return [[element name] compare: name];
 }
 
+- (void)assignName:(NSString *)theName andEmail:(NSString *)theEmail
+{
+    name = theName;
+    email = theEmail;
+}
+
+- (AddressCard *) copyWithZone: (NSZone *) zone
+{
+    AddressCard *newCard = [[AddressCard allocWithZone: zone] init];
+    
+    [newCard assignName: name andEmail: email];
+    return newCard;
+}
+
 @end
