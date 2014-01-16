@@ -40,6 +40,7 @@
 		4FCF65B518879E2000D722D6 /* fileB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fileB; sourceTree = "<group>"; };
 		4FCF65B61887B20F00D722D6 /* Fraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fraction.h; sourceTree = "<group>"; };
 		4FCF65B71887B20F00D722D6 /* Fraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fraction.m; sourceTree = "<group>"; };
+		4FCF65B91887BE0B00D722D6 /* glossary */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = glossary; sourceTree = "<group>"; };
 		F1028D54188569050019CECB /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
 		F1028D55188569050019CECB /* AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
 		F1F29EA01885639B0026965B /* AddressCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCard.h; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 				4FCF65B518879E2000D722D6 /* fileB */,
 				4FCF65B418879E0D00D722D6 /* fileA */,
 				F1028D54188569050019CECB /* AddressBook.h */,
+				4FCF65B91887BE0B00D722D6 /* glossary */,
 				F1028D55188569050019CECB /* AddressBook.m */,
 				4FCF65B318879CED00D722D6 /* testout */,
 				F1F29EA01885639B0026965B /* AddressCard.h */,
