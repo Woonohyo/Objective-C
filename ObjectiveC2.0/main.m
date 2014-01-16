@@ -8,41 +8,34 @@
 // Basic Directory Operation
 
 #import <Foundation/Foundation.h>
-
+#import "Fraction.h"
 #define PATH @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/"
 
 int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSMutableArray      *dataArray = [NSMutableArray arrayWithObjects:@"one", @"two", @"three", @"four", nil];
-        NSMutableArray      *dataArray2;
+        Fraction *frac1 = [[Fraction alloc] init];
+        Fraction *frac2 = [[Fraction alloc] init];
         
-        // simple assignment
+        // Set 1st fraction to 2/3
+        [frac1 setNumerator: 2];
+        [frac1 setDenominator: 3];
         
-        dataArray2 = dataArray;
-        [dataArray2 removeObjectAtIndex: 0];
+        // Set 2nd fraction to 3/7
+        [frac2 setNumerator: 3];
+        [frac2 setDenominator: 7];
         
-        NSLog(@"dataArray: ");
-        for ( NSString *elem in dataArray )
-            NSLog(@"    %@", elem);
+        // Display the fractions
         
-        NSLog(@"dataArray2: ");
-        for ( NSString *elem in dataArray2 )
-            NSLog(@"    %@", elem);
+        NSLog(@"First fraction is: ");
+        [frac1 print];
         
-        // try a copy, then remove the first elemtns from the copy
+        NSLog(@"Second fraction is: ");
+        [frac2 print];
         
-        dataArray2 = [dataArray mutableCopy];
-        [dataArray2 removeObjectAtIndex: 0];
-        
-        NSLog(@"dataArray: ");
-        for ( NSString *elem in dataArray )
-            NSLog(@"    %@", elem);
-        
-        NSLog(@"dataArray2: ");
-        for ( NSString *elem in dataArray2 )
-            NSLog(@"    %@", elem);
+        [frac1 release];
+        [frac2 release];
 
     }
     return 0;
