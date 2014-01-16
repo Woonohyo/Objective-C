@@ -15,45 +15,35 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSString        *dirName = @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testdir";
-        NSString        *path;
-        NSFileManager   *fm;
+        NSString                *path;
+        NSFileManager           *fm;
+        NSDirectoryEnumerator   *dirEnum;
+        NSArray                 *dirArray;
         
-        // creating an instance of filemanager
+        // instancize FileManager
         
         fm = [NSFileManager defaultManager];
         
-        // get current directory
+        // receiving current working directory
         
         path = [fm currentDirectoryPath];
-        NSLog(@"Current directory path is %@", path);
         
-        // make new directory
+        // enumerating directories
         
-        if ([fm createDirectoryAtPath:dirName withIntermediateDirectories: YES attributes: nil error: NULL] == NO) {
-            NSLog(@"Couldn't create directory1");
-            return 1;
-        }
+        dirEnum = [fm enumeratorAtPath: path];
         
-        // rename new directory
+        NSLog(@"Contents of %@", path);
         
-        if ([fm moveItemAtPath: dirName toPath: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newdir" error: NULL] == NO) {
-            NSLog(@"Directory rename failed!");
-            return 2;
-        }
+        while ((path = [dirEnum nextObject]) != nil)
+            NSLog(@"%@", path);
         
-        // move current directory to new directory
+        //another way of enumerating
         
-        if ([fm changeCurrentDirectoryPath: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newdir"] == NO) {
-            NSLog(@"change directory failed!");
-            return 3;
-        }
+        dirArray = [fm contentsOfDirectoryAtPath: [fm currentDirectoryPath] error: NULL];
+        NSLog(@"Contents using contentsOfDirectoryAtAPath:error:");
         
-        // print to console current directory
-        path = [fm currentDirectoryPath];
-        NSLog(@"Current directory path is %@", path);
-        
-        NSLog(@"ALl operations were successful!");
+        for( path in dirArray)
+            NSLog(@"%@", path);
           }
     return 0;
 }
