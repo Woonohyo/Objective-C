@@ -15,42 +15,46 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSString        *fName = @"path.m";
-        NSFileManager   *fm;
-        NSString        *path, *tempdir, *extension, *homedir, *fullpath;
-        NSArray         *components;
+        NSFileHandle        *inFile, *outFile;
+        NSData              *buffer;
         
-        fm = [NSFileManager defaultManager];
+        //open testfile for reading
         
-        // get temporary working directory
+        inFile = [NSFileHandle fileHandleForReadingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testfile"];
         
-        tempdir = NSTemporaryDirectory();
+        if (inFile == nil) {
+            NSLog(@"Open of testfile for reading failed");
+            return 1;
+        }
         
-        NSLog(@"Temporary Directory is %@", tempdir);
+        // create output file if required.
+        [[NSFileManager defaultManager] createFileAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout" contents: nil attributes: nil];
         
-        // Get basic directory from current directory.
-        path = [fm currentDirectoryPath];
-        NSLog(@"Base dir is %@", [path lastPathComponent]);
+        // open outfile for writing
         
-        // generating full path of fName of current directory
+        outFile  = [NSFileHandle fileHandleForWritingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout"];
         
-        fullpath = [path stringByAppendingPathComponent: fName];
-        NSLog(@"fullpath to %@ is %@", fName, fullpath);
+        if (outFile == nil) {
+            NSLog(@"Open of testout for writing failed");
+            return 2;
+        }
         
-        // getting extension of file
-        extension = [fullpath pathExtension];
-        NSLog(@"extension for %@ is %@", fullpath, extension);
+        // Truncate output file since it may contain data
         
-        // getting home directory of user
-        homedir = NSHomeDirectory();
-        NSLog(@"Your home directory is %@", homedir);
+        [outFile truncateFileAtOffset: 0];
         
-        // separate paths by each compoenent.
-        components = [homedir pathComponents];
+        // Read the data from infile and write it to outfile
         
-        for (path in components)
-            NSLog(@"%@", path);
+        buffer = [inFile readDataToEndOfFile];
         
-          }
+        [outFile writeData: buffer];
+        
+        // Close the two files
+        [inFile closeFile];
+        [outFile closeFile];
+        
+        // Verify file's contents
+        NSLog(@"%@", [NSString stringWithContentsOfFile: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout" encoding: NSUTF8StringEncoding error: NULL]);
+    }
     return 0;
 }
