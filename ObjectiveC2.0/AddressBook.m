@@ -89,4 +89,11 @@
     return self;
 }
 
+- (AddressBook *) copyWithZone: (NSZone *) zone
+{
+    AddressBook *newBook = [[AddressBook allocWithZone: zone] init];
+
+    return newBook;
+}
+
 @end

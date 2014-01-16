@@ -17,11 +17,12 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        Foo             *myFoo1 = [[Foo alloc] init];
-        NSMutableData   *dataArea;
-        NSKeyedArchiver *archiver;
-        AddressBook *myBook = [AddressBook alloc];
-        
+        Foo                 *myFoo1 = [[Foo alloc] init];
+        NSData       *dataArea;
+        //NSKeyedArchiver     *archiver;
+        NSKeyedUnarchiver   *unarchiver;
+        AddressBook         *myBook = [AddressBook alloc];
+        /*
         NSString *aName = @"Julia Kochan";
         NSString *aEmail = @"jewls337@axlc.com";
         NSString *bName = @"Tony Iannino";
@@ -30,7 +31,7 @@ int main(int argc, const char * argv[])
         NSString *cEmail = @"steve@steve_kochan.com";
         NSString *dName = @"Jamie Baker";
         NSString *dEmail = @"jbaker@hitmail.com";
-        
+         
         AddressCard *card1 = [[AddressCard alloc] init];
         AddressCard *card2 = [[AddressCard alloc] init];
         AddressCard *card3 = [[AddressCard alloc] init];
@@ -54,19 +55,41 @@ int main(int argc, const char * argv[])
         [myFoo1 setStrVal:@"This is string"];
         [myFoo1 setIntVal: 12345];
         [myFoo1 setFloatVal: 98.6];
-        
+        */
         //Set up a data area and connect it to an NSKeyedArchiver object
-        dataArea = [NSMutableData data];
         
-        archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: dataArea];
+        dataArea = [NSData dataWithContentsOfFile: [PATH stringByAppendingString: @"myArchive"]];
+        
+        if (!dataArea) {
+            NSLog(@" Can't read back archive file!");
+            return 1;
+        }
+        
+        unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: dataArea];
+        
+        //archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: dataArea];
         
         //Now we can begin to archive objects
-        [archiver encodeObject: myBook forKey: @"myaddrbook"];
-        [archiver encodeObject: myFoo1 forKey: @"myfoo1"];
+        //[archiver encodeObject: myBook forKey: @"myaddrbook"];
+        //[archiver encodeObject: myFoo1 forKey: @"myfoo1"];
+        
+        
+        //Decoding the object we previously stored in the archive
+        myBook = [unarchiver decodeObjectForKey: @"myaddrbook"];
+        myFoo1 = [unarchiver decodeObjectForKey: @"myfoo1"];
         
         // Write the archived data area to a file
-        if ([dataArea writeToFile: [PATH stringByAppendingString: @"myArchive"] atomically: YES] == NO)
-            NSLog(@"archiving failed");
+//        if ([dataArea writeToFile: [PATH stringByAppendingString: @"myArchive"] atomically: YES] == NO)
+//            NSLog(@"archiving failed");
+        
+        [unarchiver finishDecoding];
+        
+        
+        //Verify that the restore was successful
+        [myBook list];
+        NSLog(@"%@\n%i\n%g", myFoo1.strVal, myFoo1.intVal, myFoo1.floatVal);
+        
+        
     }
     return 0;
 }
