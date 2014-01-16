@@ -15,33 +15,16 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSMutableArray      *dataArray = [NSMutableArray arrayWithObjects:
-                                          [NSMutableString stringWithString:@"one"],
-                                          [NSMutableString stringWithString:@"two"],
-                                          [NSMutableString stringWithString:@"three"],
-                                          nil
-                                          ];
+        Fraction *f1 = [[Fraction alloc] init];
+        Fraction *f2;
         
-        NSMutableArray      *dataArray2;
-        NSMutableString     *mStr;
+        [f1 setTo: 2 over: 5];
+        f2 = [f1 copy];
         
-        NSLog(@"dataArray: ");
-        for ( NSString *elem in dataArray )
-            NSLog(@"    %@", elem);
+        [f2 setTo: 1 over: 3];
         
-        // make a copy, then change one of the strings
-        dataArray2 = [dataArray mutableCopy];
-        
-        mStr = dataArray[0];
-        [mStr appendString:@"ONE"];
-        
-        NSLog(@"dataArray:" );
-        for ( NSString *elem in dataArray )
-            NSLog(@"    %@", elem);
-        
-        NSLog(@"dataArray2: ");
-        for ( NSString *elem in dataArray2 )
-            NSLog(@"    %@", elem);
+        [f1 print];
+        [f2 print];
         
     }
     return 0;
