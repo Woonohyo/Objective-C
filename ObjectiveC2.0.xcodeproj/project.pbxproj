@@ -35,6 +35,8 @@
 		4F0DAA0C1883DF9F00B750ED /* ObjectiveC2_0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ObjectiveC2_0.1; sourceTree = "<group>"; };
 		4FCF65B2188799FF00D722D6 /* testfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = testfile; sourceTree = "<group>"; };
 		4FCF65B318879CED00D722D6 /* testout */ = {isa = PBXFileReference; lastKnownFileType = text; path = testout; sourceTree = "<group>"; };
+		4FCF65B418879E0D00D722D6 /* fileA */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fileA; sourceTree = "<group>"; };
+		4FCF65B518879E2000D722D6 /* fileB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fileB; sourceTree = "<group>"; };
 		F1028D54188569050019CECB /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
 		F1028D55188569050019CECB /* AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
 		F1F29EA01885639B0026965B /* AddressCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCard.h; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				4F0DAA081883DF9F00B750ED /* main.m */,
+				4FCF65B518879E2000D722D6 /* fileB */,
+				4FCF65B418879E0D00D722D6 /* fileA */,
 				F1028D54188569050019CECB /* AddressBook.h */,
 				F1028D55188569050019CECB /* AddressBook.m */,
 				4FCF65B318879CED00D722D6 /* testout */,

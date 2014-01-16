@@ -16,45 +16,40 @@ int main(int argc, const char * argv[])
     
     @autoreleasepool {
         NSFileHandle        *inFile, *outFile;
-        NSData              *buffer;
+        NSData        *buffer;
         
-        //open testfile for reading
+        // open the fileA for reading
         
-        inFile = [NSFileHandle fileHandleForReadingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testfile"];
+        inFile = [NSFileHandle fileHandleForReadingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/fileA"];
         
         if (inFile == nil) {
-            NSLog(@"Open of testfile for reading failed");
+            NSLog(@"Open of fileA for reading failed");
             return 1;
         }
         
-        // create output file if required.
-        [[NSFileManager defaultManager] createFileAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout" contents: nil attributes: nil];
+        // open the fileB for updating
         
-        // open outfile for writing
-        
-        outFile  = [NSFileHandle fileHandleForWritingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout"];
+        outFile = [NSFileHandle fileHandleForUpdatingAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/fileB"];
         
         if (outFile == nil) {
-            NSLog(@"Open of testout for writing failed");
+            NSLog(@"Open of fileB for writing failed");
             return 2;
         }
         
-        // Truncate output file since it may contain data
+        // Seek to the end of outFile
+        [outFile seekToEndOfFile];
         
-        [outFile truncateFileAtOffset: 0];
-        
-        // Read the data from infile and write it to outfile
-        
+        // read inFile and write its contents to outFile.
         buffer = [inFile readDataToEndOfFile];
-        
         [outFile writeData: buffer];
         
         // Close the two files
         [inFile closeFile];
         [outFile closeFile];
         
-        // Verify file's contents
-        NSLog(@"%@", [NSString stringWithContentsOfFile: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testout" encoding: NSUTF8StringEncoding error: NULL]);
+        // verify its contents.
+        
+        NSLog(@"%@", [NSString stringWithContentsOfFile: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/fileB" encoding: NSUTF8StringEncoding error: NULL]);
     }
     return 0;
 }
