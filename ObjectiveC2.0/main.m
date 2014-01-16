@@ -15,17 +15,12 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSDictionary *glossary = @{
-                                   @"abstract class":
-                                       @"A class defined so other classes can inherit from it",
-                                   @"adopt":
-                                       @"To implement all the methods defined in a protocol",
-                                   @"archiving":
-                                       @"Storing an object for later use"
-                                   };
+        NSDictionary *glossary;
         
-        if ([glossary writeToFile: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/glossary" atomically: YES] == NO)
-            NSLog(@"Save to file failed");
+        glossary = [NSDictionary dictionaryWithContentsOfFile:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/glossary"];
+        
+        for (NSString *key in glossary)
+            NSLog(@"%@: %@", key, [glossary objectForKey: key]);
     }
     return 0;
 }
