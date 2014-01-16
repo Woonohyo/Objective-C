@@ -2,9 +2,10 @@
 //  main.m
 //  ObjectiveC2.0
 //
-//  Created by LinePlus on 2014. 1. 13..
-//  Copyright (c) 2014년 LinePlus. All rights reserved.
+//  Created by Woonohyo on 2014. 1. 13..
+//  Copyright (c) 2014년 Woonohyo. All rights reserved.
 //
+// Basic Directory Operation
 
 #import <Foundation/Foundation.h>
 
@@ -14,28 +15,45 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSFileManager       *fm;
-        NSData              *fileData;
+        NSString        *dirName = @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testdir";
+        NSString        *path;
+        NSFileManager   *fm;
+        
+        // creating an instance of filemanager
         
         fm = [NSFileManager defaultManager];
         
-        // Reading newfile2
+        // get current directory
         
-        fileData = [fm contentsAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newfile2"];
+        path = [fm currentDirectoryPath];
+        NSLog(@"Current directory path is %@", path);
         
-        if (fileData == nil) {
-            NSLog(@"File read failed");
+        // make new directory
+        
+        if ([fm createDirectoryAtPath:dirName withIntermediateDirectories: YES attributes: nil error: NULL] == NO) {
+            NSLog(@"Couldn't create directory1");
             return 1;
         }
         
-        // recording data to newfile3
+        // rename new directory
         
-        if ([fm createFileAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newfile3" contents:fileData attributes: nil] == NO) {
-            NSLog(@"Couldn't create the copy!");
+        if ([fm moveItemAtPath: dirName toPath: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newdir" error: NULL] == NO) {
+            NSLog(@"Directory rename failed!");
             return 2;
         }
         
-        NSLog(@"File copy was successful!");
-    }
+        // move current directory to new directory
+        
+        if ([fm changeCurrentDirectoryPath: @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newdir"] == NO) {
+            NSLog(@"change directory failed!");
+            return 3;
+        }
+        
+        // print to console current directory
+        path = [fm currentDirectoryPath];
+        NSLog(@"Current directory path is %@", path);
+        
+        NSLog(@"ALl operations were successful!");
+          }
     return 0;
 }
