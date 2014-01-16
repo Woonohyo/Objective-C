@@ -14,56 +14,28 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        NSString                *fName = @"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/testfile";
-        NSFileManager           *fm;
-        NSDictionary            *attr;
+        NSFileManager       *fm;
+        NSData              *fileData;
         
-        // Generating instance of fileManager
         fm = [NSFileManager defaultManager];
         
-        // check the existency of testfile
-        if([fm fileExistsAtPath: fName] == NO) {
-            NSLog(@"File doesn't exist!");
+        // Reading newfile2
+        
+        fileData = [fm contentsAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newfile2"];
+        
+        if (fileData == nil) {
+            NSLog(@"File read failed");
             return 1;
         }
         
-        // Copying the file
-        if ([fm copyItemAtPath: fName toPath: @"newfile" error: NULL] == NO) {
-            NSLog(@"File Copy Failed");
+        // recording data to newfile3
+        
+        if ([fm createFileAtPath:@"/Users/lineplus/Documents/Objective-C/ObjectiveC2.0/newfile3" contents:fileData attributes: nil] == NO) {
+            NSLog(@"Couldn't create the copy!");
             return 2;
         }
         
-        // Comparing copied one to original one.
-        if ([fm contentsEqualAtPath: fName andPath: @"newfile"] == NO) {
-            NSLog(@"Files are not Equal");
-            return 3;
-        }
-        
-        // rename copied one.
-        if ([fm moveItemAtPath:@"newfile" toPath:@"newfile2" error:NULL] == NO) {
-            NSLog(@"File rename Failed");
-            return 4;
-        }
-        
-        // get file size of newfile2
-        if ((attr = [fm attributesOfItemAtPath:@"newfile2" error:NULL]) == nil) {
-            NSLog(@"Couldn't get file attributes!");
-            return 5;
-        }
-        
-        NSLog(@"File size is %llu bytes", [[attr objectForKey: NSFileSize] unsignedLongLongValue]);
-        
-        // Delete original one
-        
-        if ([fm removeItemAtPath:fName error:NULL] == NO) {
-            NSLog(@"file removal failed");
-            return 6;
-        }
-        
-        NSLog(@"All operations were successful!");
-        
-        NSLog(@"%@", [NSString stringWithContentsOfFile:@"newfile2" encoding:NSUTF8StringEncoding error:NULL]);
-        
+        NSLog(@"File copy was successful!");
     }
     return 0;
 }
